@@ -366,7 +366,7 @@ var server = http.createServer(function (req, res) {
 module.exports = server;
 ```
 
-## Exercício 5 (Express)
+## Exercício 5 (Express) @ 10 minutos
 
 1 - Crie o arquivo package.json:
 
@@ -378,4 +378,47 @@ npm init
 
 ```
 npm install express --save
+```
+
+3 - Crie uma chamada pasta api e o módulo livrosApi (livrosApi.js).
+
+```javascript
+var express = require('express');
+var app = express();
+
+module.exports = app;
+```
+
+4 - Defina uma rota utilizando o método get chamada /livros, retornando um JSON.
+
+```javascript
+var express = require('express');
+var app = express();
+var livrosService = require('../service/livrosService');
+
+app.get('/livros', function (req, res) {
+	res.json(livrosService.getLivros());
+});
+
+module.exports = app;
+```
+
+5 - Modifique o módulo index para rodar em modo api com o parâmetro -api
+
+```javascript
+var apiMode = process.argv.some(function (arg) {
+	return arg === '-api';
+});
+
+if (apiMode) {
+	console.log("Api Mode");
+	livrosApi.listen(3000);
+	return;
+}
+```
+
+Para rodar, utilize o comando:
+
+```
+node index.js -api
 ```

@@ -1,14 +1,25 @@
 var livrosService = require('./service/livrosService');
 var livrosHttp = require('./http/livrosHttp');
+var livrosApi = require('./api/livrosApi');
 var teclado = require('./infra/teclado.js');
 
 var httpMode = process.argv.some(function (arg) {
 	return arg === '-http';
 });
 
+var apiMode = process.argv.some(function (arg) {
+	return arg === '-api';
+});
+
 if (httpMode) {
 	console.log("Http Mode");
 	livrosHttp.listen(3000);
+	return;
+}
+
+if (apiMode) {
+	console.log("Api Mode");
+	livrosApi.listen(3000);
 	return;
 }
 
