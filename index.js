@@ -1,5 +1,16 @@
 var livrosService = require('./service/livrosService');
+var livrosHttp = require('./http/livrosHttp');
 var teclado = require('./infra/teclado.js');
+
+var httpMode = process.argv.some(function (arg) {
+	return arg === 'http';
+});
+
+if (httpMode) {
+	console.log("Http Mode");
+	livrosHttp.listen(3000);
+	return;
+}
 
 var exibirMenu = function () {
 	console.log('');

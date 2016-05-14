@@ -13,4 +13,5 @@ var server = http.createServer(function (req, res) {
 	});
 	res.end();
 });
-server.listen(3000);
+
+module.exports = server;

@@ -296,7 +296,32 @@ var server = http.createServer(function (req, res) {
 	});
 	res.end();
 });
-server.listen(3000);
+module.exports = server;
+```
+
+5 - Mude o módulo index para que seja possível rodar por meio do teclado ou de http.
+
+```javascript
+var livrosService = require('./service/livrosService');
+var livrosHttp = require('./http/livrosHttp');
+var teclado = require('./infra/teclado.js');
+
+var httpMode = process.argv.some(function (arg) {
+	return arg === 'http';
+});
+
+if (httpMode) {
+	console.log("Http Mode");
+	livrosHttp.listen(3000);
+	return;
+}
+
+teclado.aoDigitar(function (linha) {
+	if (linha === '/q') process.exit();
+	setTimeout(function () {
+		livrosService.exibirLivrosPorTitulo(linha);
+	}, 1000);
+});
 ```
 
 ## Exercício 5 (Express)
