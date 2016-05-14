@@ -237,9 +237,7 @@ carregarLivros();
 module.exports = livros;
 ```
 
-2 - Utilize o módulo zlib para zipar o csv. (opcional)
-
-*Exemplo: (livros.js)*
+2 - Crie um módulo chamado zip para comprimir o arquivo livros.csv utilizando o  módulo zlib.
 
 ```javascript
 var fs = require('fs');
@@ -251,9 +249,10 @@ var out = fs.createWriteStream(path.join(__dirname, '/livros.zip'));
 inp.pipe(gzip).pipe(out);
 ```
 
-3 - Abrir o csv zipado. (opcional)
+3 - Crie outro módulo chamado unzip para descomprimir o arquivo livros.zip.
 
-*Exemplo: (livros.js)*
+
+4 - Modifique a função carregarLivros, do módulo livros, para descomprimir o arquivo livros.zip antes de montar o array. 
 
 ```javascript
 var carregarLivros = function () {
@@ -271,7 +270,7 @@ var carregarLivros = function () {
 			var linhas = csv.split('\n');
 			linhas.forEach(function (linha) {
 				var propriedades = linha.split(';');
-				var livro = Livro.fromProperties(propriedades);
+				var livro = new Livro(propriedades[0], propriedades[1], propriedades[2], propriedades[3], propriedades[4], propriedades[5], propriedades[6], propriedades[7]);
 				livros.push(livro);
 			});
 		});
@@ -279,9 +278,7 @@ var carregarLivros = function () {
 };
 ```
 
-4 - Utilize o módulo http para listar os livros pela web.
-
-*Exemplo: (livrosHttp.js)*
+4 - Crie a pasta http, juntamente com o módulo livrosHttp, utilizando o módulo http para listar os livros pela web.
 
 ```javascript
 var http = require('http');
