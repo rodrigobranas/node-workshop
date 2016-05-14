@@ -1,0 +1,141 @@
+Node.js Workshop
+
+> Exercício 1 @ 10 minutos
+
+1 - Crie um módulo chamado index (index.js), ele será o entry-point.
+
+2 - Dentro do módulo index, crie:
+
+a) Uma função construtora chamada Livro contendo as propriedades titulo, autor, isbn, editora, paginas, ano, assunto, idioma.
+
+b) Um array de livros, incluindo alguns livros diretamente dentro do array.
+
+c) Utilizando a função forEach, percorra o array de livros exibindo cada um deles.
+
+> Exercício 2 (Sistema de Módulos) @ 30 minutos
+
+1 - Crie uma pasta chamada server.
+2 - Dentro da pasta server, crie uma pasta chamada domain e lá crie:
+
+a) Um módulo chamado livro (livro.js)
+b) Mova a função construtora Livro para lá, exportando-a na forma de uma função.
+
+Exemplo (livro.js):
+
+  var Livro = function (titulo, ...) {
+	this.titulo = titulo;
+	...
+  }; 
+
+  module.exports = Livro;
+
+3 - Dentro da pasta server, crie uma pasta chamada data e lá crie:
+
+a) Um módulo chamado livros (livros.js)
+b) Mova o array de livros para lá, utilizando a função require para importar a função construtora Livro.
+
+Exemplo (livros.js):
+
+var Livro = require('../domain/livro');
+
+var livros = [
+  new Livro(...),
+  ...
+];
+
+4 - No módulo index utilizar a função require para importar o módulo livros. Não se esqueça de exportar o array de livros dentro do módulo livros.
+
+Exemplo (livros.js):
+
+module.exports = livros;
+
+Exemplo (index.js):
+
+var livros = require('./server/data/livros');
+
+5 - Não acesse a camada data diretamente.
+
+a) Dentro da pasta server crie uma pasta chamada service.
+b) Crie um módulo chamado livrosService (livrosService.js).
+c) Mova a função forEach para dentro de uma função chamada exibirLivros, responsável por percorrer o array de livros e exibir seus detalhes.
+d) No módulo index, faça o require do módulo livrosService e invoque a função exibirLivros.
+
+> Exercício 3 (Global Objects) @ 20 minutos
+
+
+a) No módulo index, faça a leitura do teclado e imprima tudo que é digitado.
+
+Exemplo (index.js):
+
+process.stdin.on('readable', function () {
+	var data = process.stdin.read();
+	if (data) console.log(data.toString());
+});
+
+b) No módulo livrosService, crie uma função para exibirLivrosPorTitulo, utilizando o que foi digitado para realizar a busca.
+
+Exemplo (livrosService.js):
+
+var livrosEncontrados = livros.filter(function (livro) {
+	return livro.titulo.indexOf(titulo) > -1;
+});
+
+b) Dentro da pasta server, crie uma pasta chamada infra.
+c) Crie um módulo chamado teclado (teclado.js).
+d) Mova a função de leitura do teclado para o módulo teclado, recebendo um callback que será executado sempre que algo for digitado.
+
+Exemplo (index.js):
+
+teclado.aoDigitar(function (linha) {
+	livrosService.exibirLivrosPorTitulo(linha);
+});
+
+Exemplo (teclado.js):
+
+var aoDigitar = function (callback) {
+	process.stdin.on('readable', function () {
+		var data = process.stdin.read();
+		var linha = (data) ? data.toString() : '';
+		linha = linha.replace(/\n/, '');
+		if (linha) callback(linha);
+	});
+};
+
+e) Para sair, digite /q e invoque a função process.exit
+
+Exemplo (index.js):
+
+teclado.aoDigitar(function (linha) {
+	if (linha === '/q') process.exit();
+	livrosService.exibirLivrosPorTitulo(linha);
+});
+
+f) Para dar a impressão que a busca está sendo realizada, faça com que a função exibirLivrosPorTitulo seja invocada com um atraso de 1000ms.
+
+> Exercício 4 (Code Module) @ 15 minutos
+
+a) A lista de livros está em um arquivo .csv, leia o arquivo utilizando o módulo fs e a função readFile e crie o array de livros.
+
+Exemplo (livros.js)
+
+var carregarLivros = function () {
+	fs.readFile('./server/data/livros.csv', 'utf8', function (err, data) {
+		if (err) {
+			console.log(err);
+			return;
+		}
+		var linhas = data.split('\n');
+		linhas.forEach(function (linha) {
+			var propriedades = linha.split(';');
+			var livro = Livro.fromProperties(propriedades);
+			livros.push(livro);
+		})
+	});
+};
+
+b) Utilize o módulo zlib para zipar o csv. (Fazer em casa)
+
+c) Abrir o csv zipado. (Fazer em casa)
+
+> Exercício 5 (Express)
+
