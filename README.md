@@ -131,6 +131,10 @@ var aoDigitar = function (callback) {
 		if (linha) callback(linha);
 	});
 };
+
+module.exports {
+	aoDigitar: aoDigitar
+};
 ```
 
 3 - No módulo index, utilize a função require para importar o módulo teclado.
