@@ -38,6 +38,13 @@ var livros = [
 
 4 - Por fim, utilizando a função forEach, percorra o array de livros exibindo cada um deles.
 
+
+```javascript
+livros.forEach(function (livro) {
+	console.log(livro);
+});
+```
+
 ## Exercício 2 (Sistema de Módulos) @ 30 minutos
 
 1 - Crie uma pasta chamada domain e lá crie um módulo chamado livro (livro.js).
