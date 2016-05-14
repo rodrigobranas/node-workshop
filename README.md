@@ -20,7 +20,9 @@
 * Um módulo chamado livro (livro.js)
 * Mova a função construtora Livro para lá, exportando-a na forma de uma função.
 
-Exemplo (livro.js):
+###Exemplo (livro.js):
+
+```javascript
 
   var Livro = function (titulo, ...) {
 	this.titulo = titulo;
@@ -28,6 +30,7 @@ Exemplo (livro.js):
   }; 
 
   module.exports = Livro;
+  ``
 
 3. Dentro da pasta server, crie uma pasta chamada data e lá crie:
 
