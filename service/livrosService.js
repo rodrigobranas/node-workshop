@@ -10,6 +10,13 @@ var getLivros = function () {
 	return livros;
 };
 
+var getLivrosPorTitulo = function (titulo) {
+	if (!titulo) return livros;
+	return livros.filter(function (livro) {
+	  return livro.titulo.indexOf(titulo) > -1;
+	});
+};
+
 var exibirLivrosPorTitulo = function (titulo) {
 	console.log('Buscando por: ' + titulo);
 	var livrosEncontrados = livros.filter(function (livro) {
@@ -27,6 +34,7 @@ var exibirLivrosPorTitulo = function (titulo) {
 
 module.exports = {
 	getLivros: getLivros,
+	getLivrosPorTitulo: getLivrosPorTitulo,
 	exibirLivros: exibirLivros,
 	exibirLivrosPorTitulo: exibirLivrosPorTitulo
 };
