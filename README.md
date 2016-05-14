@@ -113,8 +113,6 @@ livrosService.exibirLivros();
 
 1 - No módulo index, faça a leitura do teclado e imprima tudo que é digitado.
 
-*Exemplo: (index.js)*
-
 ```javascript
 process.stdin.on('readable', function () {
 	var data = process.stdin.read();
@@ -122,29 +120,7 @@ process.stdin.on('readable', function () {
 });
 ```
 
-2 - No módulo livrosService, crie uma função para exibirLivrosPorTitulo, utilizando o que foi digitado para realizar a busca.
-
-*Exemplo: (livrosService.js)*
-
-```javascript
-var livrosEncontrados = livros.filter(function (livro) {
-	return livro.titulo.indexOf(titulo) > -1;
-});
-```
-
-3 - Crie uma pasta chamada infra e crie um módulo chamado teclado (teclado.js).
-
-4 - Mova a função de leitura do teclado para o módulo teclado, recebendo um callback que será executado sempre que algo for digitado.
-
-*Exemplo (index.js):*
-
-```javascript
-teclado.aoDigitar(function (linha) {
-	livrosService.exibirLivrosPorTitulo(linha);
-});
-```
-
-*Exemplo: (teclado.js)*
+2 - Crie uma pasta chamada infra e crie um módulo chamado teclado (teclado.js), movendo a função de leitura do teclado para o módulo teclado, recebendo um callback que será executado sempre que algo for digitado.
 
 ```javascript
 var aoDigitar = function (callback) {
@@ -157,18 +133,76 @@ var aoDigitar = function (callback) {
 };
 ```
 
-5 - Para sair, digite /q e invoque a função process.exit
-
-*Exemplo: (index.js)*
+3 - No módulo index, utilize a função require para importar o módulo teclado.
 
 ```javascript
+var livrosService = require('./service/livrosService');
+var teclado = require('./infra/teclado.js');
+
+teclado.aoDigitar(function (linha) {
+	console.log(linha);
+});
+```
+
+4 - No módulo livrosService, crie uma função para exibirLivrosPorTitulo, utilizando o que foi digitado para realizar a busca.
+
+```javascript
+var livros = require('../data/livros');
+
+var exibirLivrosPorTitulo = function (titulo) {
+	var livrosEncontrados = livros.filter(function (livro) {
+	  return livro.titulo.indexOf(titulo) > -1;
+	});
+	if (livrosEncontrados.length === 0) {
+		console.log("Nenhum livro foi encontrado!");
+		return;
+	}
+	livrosEncontrados.forEach(function(livro) {
+		console.log(livro);
+	});
+};
+
+module.exports = {
+	exibirLivrosPorTitulo: exibirLivrosPorTitulo
+};
+```
+
+5 - Modifique o módulo index para invocar a função exibirLivrosPorTitulo sempre que alguma linha for digitada.
+
+```javascript
+var livrosService = require('./service/livrosService');
+var teclado = require('./infra/teclado.js');
+
+teclado.aoDigitar(function (linha) {
+	livrosService.exibirLivrosPorTitulo(linha);
+});
+```
+
+6 - Adicione a possibilidade de digitar /q para sair, utilizando a função process.exit()
+
+```javascript
+var livrosService = require('./service/livrosService');
+var teclado = require('./infra/teclado.js');
+
 teclado.aoDigitar(function (linha) {
 	if (linha === '/q') process.exit();
 	livrosService.exibirLivrosPorTitulo(linha);
 });
 ```
 
-6 - Para dar a impressão que a busca está sendo realizada, faça com que a função exibirLivrosPorTitulo seja invocada com um atraso de 1000ms.
+7 - Para dar a impressão que a busca está sendo realizada, faça com que a função exibirLivrosPorTitulo seja invocada com um atraso de 1000ms.
+
+```javascript
+var livrosService = require('./service/livrosService');
+var teclado = require('./infra/teclado.js');
+
+teclado.aoDigitar(function (linha) {
+	if (linha === '/q') process.exit();
+	setTimeout(function () {
+		livrosService.exibirLivrosPorTitulo(linha);
+	}, 1000);
+});
+```
 
 ## Exercício 4 (Code Module) @ 20 minutos
 
