@@ -210,11 +210,13 @@ teclado.aoDigitar(function (linha) {
 
 ## Exercício 4 (Code Module) @ 20 minutos
 
-1 - A lista de livros está em um arquivo .csv, leia o arquivo utilizando o módulo fs e a função readFile e crie o array de livros.
-
-*Exemplo: (livros.js)*
+1 - No módulo livros, obtenha a lista de livros diretamente do arquivo livros.csv, utilizando função readFile do módulo fs, criando o array de livros a partir do arquivo lido.
 
 ```javascript
+var fs = require('fs');
+
+var livros = [];
+
 var carregarLivros = function () {
 	fs.readFile('./data/livros.csv', 'utf8', function (err, csv) {
 		if (err) {
@@ -224,11 +226,15 @@ var carregarLivros = function () {
 		var linhas = csv.split('\n');
 		linhas.forEach(function (linha) {
 			var propriedades = linha.split(';');
-			var livro = Livro.fromProperties(propriedades);
+			var livro = new Livro(propriedades[0], propriedades[1], propriedades[2], propriedades[3], propriedades[4], propriedades[5], propriedades[6], propriedades[7]);
 			livros.push(livro);
 		})
 	});
 };
+
+carregarLivros();
+
+module.exports = livros;
 ```
 
 2 - Utilize o módulo zlib para zipar o csv. (opcional)
