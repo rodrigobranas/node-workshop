@@ -20,7 +20,7 @@
 * Um módulo chamado livro (livro.js)
 * Mova a função construtora Livro para lá, exportando-a na forma de uma função.
 
-###Exemplo (livro.js):
+**Exemplo (livro.js):**
 
 ```javascript
   var Livro = function (titulo, ...) {
@@ -36,7 +36,7 @@
 * Um módulo chamado livros (livros.js)
 * Mova o array de livros para lá, utilizando a função require para importar a função construtora Livro.
 
-###Exemplo (livros.js):
+**Exemplo (livros.js):**
 
 ```javascript
 var Livro = require('../domain/livro');
@@ -49,13 +49,13 @@ var livros = [
 
 4. No módulo index utilizar a função require para importar o módulo livros. Não se esqueça de exportar o array de livros dentro do módulo livros.
 
-###Exemplo (livros.js):
+**Exemplo (livros.js):**
 
 ```javascript
 module.exports = livros;
 ```
 
-###Exemplo (index.js):
+**Exemplo (index.js):**
 
 ```javascript
 var livros = require('./server/data/livros');
