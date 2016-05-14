@@ -299,7 +299,7 @@ var server = http.createServer(function (req, res) {
 module.exports = server;
 ```
 
-5 - Mude o módulo index para que seja possível rodar por meio do teclado ou de http.
+5 - Mude o módulo index para que seja possível rodar por meio do modo teclado ou de http, passando por parâmetro a opção *http*, permitindo com que seja possível acessar a lista de livros pelo navegador na url *http://localhost:3000*
 
 ```javascript
 var livrosService = require('./service/livrosService');
