@@ -1,12 +1,40 @@
 #Node.js Workshop
 
+Após finalizar o processo de instalação do Node.js, crie uma pasta para o projeto.
+
 ## Exercício 1 @ 10 minutos
 
-1 - Crie um módulo chamado index (index.js), ele será o entry-point.
+1 - Crie um módulo chamado index (index.js), ele será o entry-point e deverá ser invocado da seguinte forma:
 
-2 - Dentro do módulo index, crie uma função construtora chamada Livro contendo as propriedades titulo, autor, isbn, editora, paginas, ano, assunto, idioma.
+```
+node index.js
+```
+
+2 - Dentro do módulo index, crie uma função construtora (aquela que utiliza o operador new) chamada Livro, contendo as propriedades titulo, autor, isbn, paginas, ano, editora, idioma e assunto.
+
+```javascript
+var Livro = function (titulo, autor, isbn, paginas, ano, editora, idioma, assunto) {
+	this.titulo = titulo;
+	this.autor = autor;
+	this.isbn = isbn;
+	this.paginas = paginas;
+	this.ano = ano;
+	this.editora = editora;
+	this.idioma = idioma;
+	this.assunto = assunto;
+};
+```
 
 3 - Crie também um array de livros, incluindo alguns livros diretamente dentro do array.
+
+
+```javascript
+var livros = [
+	new Livro(...),
+	new Livro(...),
+	new Livro(...)
+];
+```
 
 4 - Por fim, utilizando a função forEach, percorra o array de livros exibindo cada um deles.
 
@@ -16,15 +44,19 @@
 
 2 - Mova a função construtora Livro para lá, exportando-a na forma de uma função.
 
-*Exemplo: (livro.js)*
-
 ```javascript
-  var Livro = function (titulo, ...) {
+var Livro = function (titulo, autor, isbn, paginas, ano, editora, idioma, assunto) {
 	this.titulo = titulo;
-	...
-  }; 
+	this.autor = autor;
+	this.isbn = isbn;
+	this.paginas = paginas;
+	this.ano = ano;
+	this.editora = editora;
+	this.idioma = idioma;
+	this.assunto = assunto;
+};
 
-  module.exports = Livro;
+module.exports = Livro;
 ```
 
 3 - Crie uma pasta chamada data e lá crie um módulo chamado livros (livros.js)
@@ -37,26 +69,39 @@
 var Livro = require('../domain/livro');
 
 var livros = [
-  new Livro(...),
-  ...
+	new Livro(...),
+	new Livro(...),
+	new Livro(...)
 ];
 
 module.exports = livros;
 ```
 
-5 - No módulo index utilize a função require para importar o módulo livros.
+4 - Crie uma pasta chamada service e dentro crie um módulo chamado livrosService (livrosService.js).
 
-*Exemplo: (index.js)*
+5 - Mova a função forEach para dentro de uma função chamada exibirLivros, responsável por percorrer o array de livros e exibir seus detalhes.
 
 ```javascript
-var livros = require('./data/livros');
+var livros = require('../data/livros');
+
+var exibirLivros = function () {
+	livros.forEach(function (livro) {
+		console.log(livro);
+	});
+};
+
+module.exports = {
+	exibirLivros: exibirLivros
+};
 ```
 
-5 - Crie uma pasta chamada service e dentro crie um módulo chamado livrosService (livrosService.js).
+6 - Por fim, no módulo index, faça o require do módulo livrosService e invoque a função exibirLivros.
 
-6 - Mova a função forEach para dentro de uma função chamada exibirLivros, responsável por percorrer o array de livros e exibir seus detalhes.
+```javascript
+var livrosService = require('./service/livrosService');
 
-7 - Por fim, no módulo index, faça o require do módulo livrosService e invoque a função exibirLivros.
+livrosService.exibirLivros();
+```
 
 ## Exercício 3 (Global Objects) @ 20 minutos
 
