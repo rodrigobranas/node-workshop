@@ -132,7 +132,7 @@ var aoDigitar = function (callback) {
 	});
 };
 
-module.exports {
+module.exports = {
 	aoDigitar: aoDigitar
 };
 ```
