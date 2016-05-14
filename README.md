@@ -185,7 +185,28 @@ var carregarLivros = function () {
 };
 ```
 
-4 - Utilize o módulo http para permitir consultar pela web.
+4 - Utilize o módulo http para listar os livros pela web.
+
+*Exemplo: (livrosHttp.js)*
+
+```javascript
+var http = require('http');
+var livrosService = require('../service/livrosService');
+  
+var server = http.createServer(function (req, res) {
+  	res.writeHead(200, {
+    	'Content-Type': 'text/html;charset=UTF-8'
+  	});
+  	res.write("<h1>Livros</h1>")
+  	var livros = livrosService.getLivros();
+	livros.forEach(function (livro) {
+		res.write("<h4>" + livro.titulo + "</h4>");
+		res.write("<h5>" + livro.autor + "</h5><br/>");
+	});
+	res.end();
+});
+server.listen(3000);
+```
 
 ## Exercício 5 (Express)
 
