@@ -133,9 +133,21 @@ var carregarLivros = function () {
 	});
 };
 
-b) Utilize o módulo zlib para zipar o csv. (Fazer em casa)
+b) Utilize o módulo zlib para zipar o csv. (opcional)
 
-c) Abrir o csv zipado. (Fazer em casa)
+Exemplo:
+
+var fs = require('fs');
+var path = require('path');
+var gzip = require('zlib').createGzip();
+  
+var inp = fs.createReadStream(path.join(__dirname, '/livros.csv'));
+var out = fs.createWriteStream(path.join(__dirname, '/livros.zip'));
+inp.pipe(gzip).pipe(out);
+
+c) Abrir o csv zipado. (opcional)
+
+
 
 > Exercício 5 (Express)
 
