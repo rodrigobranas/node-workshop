@@ -15,9 +15,11 @@ c) Utilizando a função forEach, percorra o array de livros exibindo cada um de
 ## Exercício 2 (Sistema de Módulos) @ 30 minutos
 
 1 - Crie uma pasta chamada server.
+
 2 - Dentro da pasta server, crie uma pasta chamada domain e lá crie:
 
 a) Um módulo chamado livro (livro.js)
+
 b) Mova a função construtora Livro para lá, exportando-a na forma de uma função.
 
 **Exemplo (livro.js):**
@@ -34,6 +36,7 @@ b) Mova a função construtora Livro para lá, exportando-a na forma de uma fun�
 3 - Dentro da pasta server, crie uma pasta chamada data e lá crie:
 
 a) Um módulo chamado livros (livros.js)
+
 b) Mova o array de livros para lá, utilizando a função require para importar a função construtora Livro.
 
 **Exemplo (livros.js):**
@@ -64,8 +67,11 @@ var livros = require('./server/data/livros');
 5 - Não acesse a camada data diretamente.
 
 a) Dentro da pasta server crie uma pasta chamada service.
+
 b) Crie um módulo chamado livrosService (livrosService.js).
+
 c) Mova a função forEach para dentro de uma função chamada exibirLivros, responsável por percorrer o array de livros e exibir seus detalhes.
+
 d) No módulo index, faça o require do módulo livrosService e invoque a função exibirLivros.
 
 ## Exercício 3 (Global Objects) @ 20 minutos
@@ -93,7 +99,9 @@ var livrosEncontrados = livros.filter(function (livro) {
 ```
 
 b) Dentro da pasta server, crie uma pasta chamada infra.
+
 c) Crie um módulo chamado teclado (teclado.js).
+
 d) Mova a função de leitura do teclado para o módulo teclado, recebendo um callback que será executado sempre que algo for digitado.
 
 ###Exemplo (index.js):
@@ -134,8 +142,9 @@ f) Para dar a impressão que a busca está sendo realizada, faça com que a fun�
 
 a) A lista de livros está em um arquivo .csv, leia o arquivo utilizando o módulo fs e a função readFile e crie o array de livros.
 
-Exemplo (livros.js)
+###Exemplo (livros.js)
 
+```javascript
 var carregarLivros = function () {
 	fs.readFile('./server/data/livros.csv', 'utf8', function (err, csv) {
 		if (err) {
@@ -150,11 +159,13 @@ var carregarLivros = function () {
 		})
 	});
 };
+```
 
 b) Utilize o módulo zlib para zipar o csv. (opcional)
 
-Exemplo:
+###Exemplo:
 
+```javascript
 var fs = require('fs');
 var path = require('path');
 var gzip = require('zlib').createGzip();
@@ -162,9 +173,11 @@ var gzip = require('zlib').createGzip();
 var inp = fs.createReadStream(path.join(__dirname, '/livros.csv'));
 var out = fs.createWriteStream(path.join(__dirname, '/livros.zip'));
 inp.pipe(gzip).pipe(out);
+```
 
 c) Abrir o csv zipado. (opcional)
 
+```javascript
 var carregarLivros = function () {
 	fs.readFile(__dirname + '/livros.zip', function (err, zip) {
 		if (err) {
@@ -186,6 +199,7 @@ var carregarLivros = function () {
 		});
 	});
 };
+```
 
-> Exercício 5 (Express)
+## Exercício 5 (Express)
 
