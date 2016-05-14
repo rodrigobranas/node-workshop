@@ -120,7 +120,7 @@ teclado.aoDigitar(function (linha) {
 
 6 - Para dar a impressão que a busca está sendo realizada, faça com que a função exibirLivrosPorTitulo seja invocada com um atraso de 1000ms.
 
-## Exercício 4 (Code Module) @ 15 minutos
+## Exercício 4 (Code Module) @ 20 minutos
 
 1 - A lista de livros está em um arquivo .csv, leia o arquivo utilizando o módulo fs e a função readFile e crie o array de livros.
 
