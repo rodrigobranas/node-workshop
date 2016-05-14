@@ -3,7 +3,7 @@ var livrosHttp = require('./http/livrosHttp');
 var teclado = require('./infra/teclado.js');
 
 var httpMode = process.argv.some(function (arg) {
-	return arg === 'http';
+	return arg === '-http';
 });
 
 if (httpMode) {
@@ -12,6 +12,7 @@ if (httpMode) {
 	return;
 }
 
+console.log("Keyboard Mode");
 var exibirMenu = function () {
 	console.log('');
 	console.log('O que você está buscando?');
