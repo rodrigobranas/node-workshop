@@ -2,23 +2,23 @@
 
 ## Exercício 1 @ 10 minutos
 
-1. Crie um módulo chamado index (index.js), ele será o entry-point.
+1 - Crie um módulo chamado index (index.js), ele será o entry-point.
 
-2. Dentro do módulo index, crie:
+2 - Dentro do módulo index, crie:
 
-* Uma função construtora chamada Livro contendo as propriedades titulo, autor, isbn, editora, paginas, ano, assunto, idioma.
+a) Uma função construtora chamada Livro contendo as propriedades titulo, autor, isbn, editora, paginas, ano, assunto, idioma.
 
-* Um array de livros, incluindo alguns livros diretamente dentro do array.
+b) Um array de livros, incluindo alguns livros diretamente dentro do array.
 
-* Utilizando a função forEach, percorra o array de livros exibindo cada um deles.
+c) Utilizando a função forEach, percorra o array de livros exibindo cada um deles.
 
 ## Exercício 2 (Sistema de Módulos) @ 30 minutos
 
-1. Crie uma pasta chamada server.
-2. Dentro da pasta server, crie uma pasta chamada domain e lá crie:
+1 - Crie uma pasta chamada server.
+2 - Dentro da pasta server, crie uma pasta chamada domain e lá crie:
 
-* Um módulo chamado livro (livro.js)
-* Mova a função construtora Livro para lá, exportando-a na forma de uma função.
+a) Um módulo chamado livro (livro.js)
+b) Mova a função construtora Livro para lá, exportando-a na forma de uma função.
 
 **Exemplo (livro.js):**
 
@@ -31,10 +31,10 @@
   module.exports = Livro;
 ```
 
-3. Dentro da pasta server, crie uma pasta chamada data e lá crie:
+3 - Dentro da pasta server, crie uma pasta chamada data e lá crie:
 
-* Um módulo chamado livros (livros.js)
-* Mova o array de livros para lá, utilizando a função require para importar a função construtora Livro.
+a) Um módulo chamado livros (livros.js)
+b) Mova o array de livros para lá, utilizando a função require para importar a função construtora Livro.
 
 **Exemplo (livros.js):**
 
@@ -47,7 +47,7 @@ var livros = [
 ];
 ```
 
-4. No módulo index utilizar a função require para importar o módulo livros. Não se esqueça de exportar o array de livros dentro do módulo livros.
+4 - No módulo index utilizar a função require para importar o módulo livros. Não se esqueça de exportar o array de livros dentro do módulo livros.
 
 **Exemplo (livros.js):**
 
@@ -61,17 +61,17 @@ module.exports = livros;
 var livros = require('./server/data/livros');
 ```
 
-5. Não acesse a camada data diretamente.
+5 - Não acesse a camada data diretamente.
 
-* Dentro da pasta server crie uma pasta chamada service.
-* Crie um módulo chamado livrosService (livrosService.js).
-* Mova a função forEach para dentro de uma função chamada exibirLivros, responsável por percorrer o array de livros e exibir seus detalhes.
-* No módulo index, faça o require do módulo livrosService e invoque a função exibirLivros.
+a) Dentro da pasta server crie uma pasta chamada service.
+b) Crie um módulo chamado livrosService (livrosService.js).
+c) Mova a função forEach para dentro de uma função chamada exibirLivros, responsável por percorrer o array de livros e exibir seus detalhes.
+d) No módulo index, faça o require do módulo livrosService e invoque a função exibirLivros.
 
 ## Exercício 3 (Global Objects) @ 20 minutos
 
 
-1. No módulo index, faça a leitura do teclado e imprima tudo que é digitado.
+1 - No módulo index, faça a leitura do teclado e imprima tudo que é digitado.
 
 ###Exemplo (index.js):
 
@@ -82,7 +82,7 @@ process.stdin.on('readable', function () {
 });
 ```
 
-* No módulo livrosService, crie uma função para exibirLivrosPorTitulo, utilizando o que foi digitado para realizar a busca.
+a) No módulo livrosService, crie uma função para exibirLivrosPorTitulo, utilizando o que foi digitado para realizar a busca.
 
 ###Exemplo (livrosService.js):
 
@@ -92,9 +92,9 @@ var livrosEncontrados = livros.filter(function (livro) {
 });
 ```
 
-* Dentro da pasta server, crie uma pasta chamada infra.
-* Crie um módulo chamado teclado (teclado.js).
-* Mova a função de leitura do teclado para o módulo teclado, recebendo um callback que será executado sempre que algo for digitado.
+b) Dentro da pasta server, crie uma pasta chamada infra.
+c) Crie um módulo chamado teclado (teclado.js).
+d) Mova a função de leitura do teclado para o módulo teclado, recebendo um callback que será executado sempre que algo for digitado.
 
 ###Exemplo (index.js):
 
@@ -117,7 +117,7 @@ var aoDigitar = function (callback) {
 };
 ```
 
-* Para sair, digite /q e invoque a função process.exit
+e) Para sair, digite /q e invoque a função process.exit
 
 ###Exemplo (index.js):
 
@@ -128,7 +128,7 @@ teclado.aoDigitar(function (linha) {
 });
 ```
 
-* Para dar a impressão que a busca está sendo realizada, faça com que a função exibirLivrosPorTitulo seja invocada com um atraso de 1000ms.
+f) Para dar a impressão que a busca está sendo realizada, faça com que a função exibirLivrosPorTitulo seja invocada com um atraso de 1000ms.
 
 ## Exercício 4 (Code Module) @ 15 minutos
 
