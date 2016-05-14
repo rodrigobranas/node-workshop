@@ -324,5 +324,9 @@ teclado.aoDigitar(function (linha) {
 });
 ```
 
+```
+node index.js http
+```
+
 ## Exercício 5 (Express)
 
