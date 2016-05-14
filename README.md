@@ -23,7 +23,6 @@
 ###Exemplo (livro.js):
 
 ```javascript
-
   var Livro = function (titulo, ...) {
 	this.titulo = titulo;
 	...
@@ -37,24 +36,30 @@
 * Um módulo chamado livros (livros.js)
 * Mova o array de livros para lá, utilizando a função require para importar a função construtora Livro.
 
-Exemplo (livros.js):
+###Exemplo (livros.js):
 
+```javascript
 var Livro = require('../domain/livro');
 
 var livros = [
   new Livro(...),
   ...
 ];
+```
 
 4. No módulo index utilizar a função require para importar o módulo livros. Não se esqueça de exportar o array de livros dentro do módulo livros.
 
-Exemplo (livros.js):
+###Exemplo (livros.js):
 
+```javascript
 module.exports = livros;
+```
 
-Exemplo (index.js):
+###Exemplo (index.js):
 
+```javascript
 var livros = require('./server/data/livros');
+```
 
 5. Não acesse a camada data diretamente.
 
@@ -63,38 +68,45 @@ var livros = require('./server/data/livros');
 * Mova a função forEach para dentro de uma função chamada exibirLivros, responsável por percorrer o array de livros e exibir seus detalhes.
 * No módulo index, faça o require do módulo livrosService e invoque a função exibirLivros.
 
-> Exercício 3 (Global Objects) @ 20 minutos
+## Exercício 3 (Global Objects) @ 20 minutos
 
 
-a) No módulo index, faça a leitura do teclado e imprima tudo que é digitado.
+1. No módulo index, faça a leitura do teclado e imprima tudo que é digitado.
 
-Exemplo (index.js):
+###Exemplo (index.js):
 
+```javascript
 process.stdin.on('readable', function () {
 	var data = process.stdin.read();
 	if (data) console.log(data.toString());
 });
+```
 
-b) No módulo livrosService, crie uma função para exibirLivrosPorTitulo, utilizando o que foi digitado para realizar a busca.
+* No módulo livrosService, crie uma função para exibirLivrosPorTitulo, utilizando o que foi digitado para realizar a busca.
 
-Exemplo (livrosService.js):
+###Exemplo (livrosService.js):
 
+```javascript
 var livrosEncontrados = livros.filter(function (livro) {
 	return livro.titulo.indexOf(titulo) > -1;
 });
+```
 
-b) Dentro da pasta server, crie uma pasta chamada infra.
-c) Crie um módulo chamado teclado (teclado.js).
-d) Mova a função de leitura do teclado para o módulo teclado, recebendo um callback que será executado sempre que algo for digitado.
+* Dentro da pasta server, crie uma pasta chamada infra.
+* Crie um módulo chamado teclado (teclado.js).
+* Mova a função de leitura do teclado para o módulo teclado, recebendo um callback que será executado sempre que algo for digitado.
 
-Exemplo (index.js):
+###Exemplo (index.js):
 
+```javascript
 teclado.aoDigitar(function (linha) {
 	livrosService.exibirLivrosPorTitulo(linha);
 });
+```
 
-Exemplo (teclado.js):
+###Exemplo (teclado.js):
 
+```javascript
 var aoDigitar = function (callback) {
 	process.stdin.on('readable', function () {
 		var data = process.stdin.read();
@@ -103,19 +115,22 @@ var aoDigitar = function (callback) {
 		if (linha) callback(linha);
 	});
 };
+```
 
-e) Para sair, digite /q e invoque a função process.exit
+* Para sair, digite /q e invoque a função process.exit
 
-Exemplo (index.js):
+###Exemplo (index.js):
 
+```javascript
 teclado.aoDigitar(function (linha) {
 	if (linha === '/q') process.exit();
 	livrosService.exibirLivrosPorTitulo(linha);
 });
+```
 
-f) Para dar a impressão que a busca está sendo realizada, faça com que a função exibirLivrosPorTitulo seja invocada com um atraso de 1000ms.
+* Para dar a impressão que a busca está sendo realizada, faça com que a função exibirLivrosPorTitulo seja invocada com um atraso de 1000ms.
 
-> Exercício 4 (Code Module) @ 15 minutos
+## Exercício 4 (Code Module) @ 15 minutos
 
 a) A lista de livros está em um arquivo .csv, leia o arquivo utilizando o módulo fs e a função readFile e crie o array de livros.
 
