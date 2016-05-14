@@ -16,7 +16,7 @@
 
 2 - Mova a função construtora Livro para lá, exportando-a na forma de uma função.
 
-**Exemplo (livro.js):**
+*Exemplo: (livro.js)*
 
 ```javascript
   var Livro = function (titulo, ...) {
@@ -31,7 +31,7 @@
 
 4 - Mova o array de livros para lá, utilizando a função require para importar a função construtora Livro.
 
-**Exemplo (livros.js):**
+*Exemplo: (livros.js)*
 
 ```javascript
 var Livro = require('../domain/livro');
@@ -46,7 +46,7 @@ module.exports = livros;
 
 5 - No módulo index utilize a função require para importar o módulo livros.
 
-**Exemplo (index.js):**
+*Exemplo: (index.js)*
 
 ```javascript
 var livros = require('./data/livros');
@@ -63,7 +63,7 @@ var livros = require('./data/livros');
 
 1 - No módulo index, faça a leitura do teclado e imprima tudo que é digitado.
 
-###Exemplo (index.js):
+*Exemplo: (index.js)*
 
 ```javascript
 process.stdin.on('readable', function () {
@@ -74,7 +74,7 @@ process.stdin.on('readable', function () {
 
 2 - No módulo livrosService, crie uma função para exibirLivrosPorTitulo, utilizando o que foi digitado para realizar a busca.
 
-###Exemplo (livrosService.js):
+*Exemplo: (livrosService.js)*
 
 ```javascript
 var livrosEncontrados = livros.filter(function (livro) {
@@ -86,7 +86,7 @@ var livrosEncontrados = livros.filter(function (livro) {
 
 4 - Mova a função de leitura do teclado para o módulo teclado, recebendo um callback que será executado sempre que algo for digitado.
 
-###Exemplo (index.js):
+*Exemplo (index.js):*
 
 ```javascript
 teclado.aoDigitar(function (linha) {
@@ -94,7 +94,7 @@ teclado.aoDigitar(function (linha) {
 });
 ```
 
-###Exemplo (teclado.js):
+*Exemplo: (teclado.js)*
 
 ```javascript
 var aoDigitar = function (callback) {
@@ -109,7 +109,7 @@ var aoDigitar = function (callback) {
 
 5 - Para sair, digite /q e invoque a função process.exit
 
-###Exemplo (index.js):
+*Exemplo: (index.js)*
 
 ```javascript
 teclado.aoDigitar(function (linha) {
@@ -124,7 +124,7 @@ teclado.aoDigitar(function (linha) {
 
 1 - A lista de livros está em um arquivo .csv, leia o arquivo utilizando o módulo fs e a função readFile e crie o array de livros.
 
-###Exemplo (livros.js)
+*Exemplo: (livros.js)*
 
 ```javascript
 var carregarLivros = function () {
@@ -145,7 +145,7 @@ var carregarLivros = function () {
 
 2 - Utilize o módulo zlib para zipar o csv. (opcional)
 
-###Exemplo:
+*Exemplo: (livros.js)*
 
 ```javascript
 var fs = require('fs');
@@ -158,6 +158,8 @@ inp.pipe(gzip).pipe(out);
 ```
 
 3 - Abrir o csv zipado. (opcional)
+
+*Exemplo: (livros.js)*
 
 ```javascript
 var carregarLivros = function () {
