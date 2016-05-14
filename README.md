@@ -40,15 +40,11 @@ var livros = [
   new Livro(...),
   ...
 ];
-```
 
-5 - No módulo index utilizar a função require para importar o módulo livros. Não se esqueça de exportar o array de livros dentro do módulo livros.
-
-**Exemplo (livros.js):**
-
-```javascript
 module.exports = livros;
 ```
+
+5 - No módulo index utilize a função require para importar o módulo livros.
 
 **Exemplo (index.js):**
 
