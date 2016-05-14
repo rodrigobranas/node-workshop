@@ -1,5 +1,5 @@
-var livrosService = require('./server/service/livrosService');
-var teclado = require('./server/infra/teclado.js');
+var livrosService = require('./service/livrosService');
+var teclado = require('./infra/teclado.js');
 
 var exibirMenu = function () {
 	console.log('');

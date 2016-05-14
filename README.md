@@ -4,23 +4,17 @@
 
 1 - Crie um módulo chamado index (index.js), ele será o entry-point.
 
-2 - Dentro do módulo index, crie:
+2 - Dentro do módulo index, crie uma função construtora chamada Livro contendo as propriedades titulo, autor, isbn, editora, paginas, ano, assunto, idioma.
 
-a) Uma função construtora chamada Livro contendo as propriedades titulo, autor, isbn, editora, paginas, ano, assunto, idioma.
+3 - Crie também um array de livros, incluindo alguns livros diretamente dentro do array.
 
-b) Um array de livros, incluindo alguns livros diretamente dentro do array.
-
-c) Utilizando a função forEach, percorra o array de livros exibindo cada um deles.
+4 - Por fim, utilizando a função forEach, percorra o array de livros exibindo cada um deles.
 
 ## Exercício 2 (Sistema de Módulos) @ 30 minutos
 
-1 - Crie uma pasta chamada server.
+1 - Crie uma pasta chamada domain e lá crie um módulo chamado livro (livro.js).
 
-2 - Dentro da pasta server, crie uma pasta chamada domain e lá crie:
-
-a) Um módulo chamado livro (livro.js)
-
-b) Mova a função construtora Livro para lá, exportando-a na forma de uma função.
+2 - Mova a função construtora Livro para lá, exportando-a na forma de uma função.
 
 **Exemplo (livro.js):**
 
@@ -33,11 +27,9 @@ b) Mova a função construtora Livro para lá, exportando-a na forma de uma fun�
   module.exports = Livro;
 ```
 
-3 - Dentro da pasta server, crie uma pasta chamada data e lá crie:
+3 - Crie uma pasta chamada data e lá crie um módulo chamado livros (livros.js)
 
-a) Um módulo chamado livros (livros.js)
-
-b) Mova o array de livros para lá, utilizando a função require para importar a função construtora Livro.
+4 - Mova o array de livros para lá, utilizando a função require para importar a função construtora Livro.
 
 **Exemplo (livros.js):**
 
@@ -50,7 +42,7 @@ var livros = [
 ];
 ```
 
-4 - No módulo index utilizar a função require para importar o módulo livros. Não se esqueça de exportar o array de livros dentro do módulo livros.
+5 - No módulo index utilizar a função require para importar o módulo livros. Não se esqueça de exportar o array de livros dentro do módulo livros.
 
 **Exemplo (livros.js):**
 
@@ -61,18 +53,14 @@ module.exports = livros;
 **Exemplo (index.js):**
 
 ```javascript
-var livros = require('./server/data/livros');
+var livros = require('./data/livros');
 ```
 
-5 - Não acesse a camada data diretamente.
+5 - Crie uma pasta chamada service e dentro crie um módulo chamado livrosService (livrosService.js).
 
-a) Dentro da pasta server crie uma pasta chamada service.
+6 - Mova a função forEach para dentro de uma função chamada exibirLivros, responsável por percorrer o array de livros e exibir seus detalhes.
 
-b) Crie um módulo chamado livrosService (livrosService.js).
-
-c) Mova a função forEach para dentro de uma função chamada exibirLivros, responsável por percorrer o array de livros e exibir seus detalhes.
-
-d) No módulo index, faça o require do módulo livrosService e invoque a função exibirLivros.
+7 - Por fim, no módulo index, faça o require do módulo livrosService e invoque a função exibirLivros.
 
 ## Exercício 3 (Global Objects) @ 20 minutos
 
@@ -88,7 +76,7 @@ process.stdin.on('readable', function () {
 });
 ```
 
-a) No módulo livrosService, crie uma função para exibirLivrosPorTitulo, utilizando o que foi digitado para realizar a busca.
+2 - No módulo livrosService, crie uma função para exibirLivrosPorTitulo, utilizando o que foi digitado para realizar a busca.
 
 ###Exemplo (livrosService.js):
 
@@ -98,11 +86,9 @@ var livrosEncontrados = livros.filter(function (livro) {
 });
 ```
 
-b) Dentro da pasta server, crie uma pasta chamada infra.
+3 - Crie uma pasta chamada infra e crie um módulo chamado teclado (teclado.js).
 
-c) Crie um módulo chamado teclado (teclado.js).
-
-d) Mova a função de leitura do teclado para o módulo teclado, recebendo um callback que será executado sempre que algo for digitado.
+4 - Mova a função de leitura do teclado para o módulo teclado, recebendo um callback que será executado sempre que algo for digitado.
 
 ###Exemplo (index.js):
 
@@ -125,7 +111,7 @@ var aoDigitar = function (callback) {
 };
 ```
 
-e) Para sair, digite /q e invoque a função process.exit
+5 - Para sair, digite /q e invoque a função process.exit
 
 ###Exemplo (index.js):
 
@@ -136,17 +122,17 @@ teclado.aoDigitar(function (linha) {
 });
 ```
 
-f) Para dar a impressão que a busca está sendo realizada, faça com que a função exibirLivrosPorTitulo seja invocada com um atraso de 1000ms.
+6 - Para dar a impressão que a busca está sendo realizada, faça com que a função exibirLivrosPorTitulo seja invocada com um atraso de 1000ms.
 
 ## Exercício 4 (Code Module) @ 15 minutos
 
-a) A lista de livros está em um arquivo .csv, leia o arquivo utilizando o módulo fs e a função readFile e crie o array de livros.
+1 - A lista de livros está em um arquivo .csv, leia o arquivo utilizando o módulo fs e a função readFile e crie o array de livros.
 
 ###Exemplo (livros.js)
 
 ```javascript
 var carregarLivros = function () {
-	fs.readFile('./server/data/livros.csv', 'utf8', function (err, csv) {
+	fs.readFile('./data/livros.csv', 'utf8', function (err, csv) {
 		if (err) {
 			console.log(err);
 			return;
@@ -161,7 +147,7 @@ var carregarLivros = function () {
 };
 ```
 
-b) Utilize o módulo zlib para zipar o csv. (opcional)
+2 - Utilize o módulo zlib para zipar o csv. (opcional)
 
 ###Exemplo:
 
@@ -175,7 +161,7 @@ var out = fs.createWriteStream(path.join(__dirname, '/livros.zip'));
 inp.pipe(gzip).pipe(out);
 ```
 
-c) Abrir o csv zipado. (opcional)
+3 - Abrir o csv zipado. (opcional)
 
 ```javascript
 var carregarLivros = function () {
@@ -200,6 +186,8 @@ var carregarLivros = function () {
 	});
 };
 ```
+
+4 - Utilize o módulo http para permitir consultar pela web.
 
 ## Exercício 5 (Express)
 
