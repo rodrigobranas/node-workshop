@@ -208,7 +208,7 @@ teclado.aoDigitar(function (linha) {
 });
 ```
 
-## Exercício 4 (Code Module) @ 20 minutos
+## Exercício 4 (Code Module) @ 30 minutos
 
 1 - No módulo livros, obtenha a lista de livros diretamente do arquivo livros.csv, utilizando função readFile do módulo fs, criando o array de livros a partir do arquivo lido.
 
@@ -368,3 +368,14 @@ module.exports = server;
 
 ## Exercício 5 (Express)
 
+1 - Crie o arquivo package.json:
+
+```
+npm init
+```
+
+2 - Instale o Express utilizando o NPM:
+
+```
+npm install express --save
+```
