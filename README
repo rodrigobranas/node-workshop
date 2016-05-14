@@ -119,12 +119,12 @@ a) A lista de livros está em um arquivo .csv, leia o arquivo utilizando o módu
 Exemplo (livros.js)
 
 var carregarLivros = function () {
-	fs.readFile('./server/data/livros.csv', 'utf8', function (err, data) {
+	fs.readFile('./server/data/livros.csv', 'utf8', function (err, csv) {
 		if (err) {
 			console.log(err);
 			return;
 		}
-		var linhas = data.split('\n');
+		var linhas = csv.split('\n');
 		linhas.forEach(function (linha) {
 			var propriedades = linha.split(';');
 			var livro = Livro.fromProperties(propriedades);
@@ -147,7 +147,27 @@ inp.pipe(gzip).pipe(out);
 
 c) Abrir o csv zipado. (opcional)
 
-
+var carregarLivros = function () {
+	fs.readFile(__dirname + '/livros.zip', function (err, zip) {
+		if (err) {
+			console.log(err);
+			return;
+		}
+		zlib.unzip(zip, function (err, data) {
+			if (err) {
+				console.log(err);
+				return;
+			}
+			var csv = data.toString('utf8');
+			var linhas = csv.split('\n');
+			linhas.forEach(function (linha) {
+				var propriedades = linha.split(';');
+				var livro = Livro.fromProperties(propriedades);
+				livros.push(livro);
+			});
+		});
+	});
+};
 
 > Exercício 5 (Express)
 
