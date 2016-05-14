@@ -63,8 +63,6 @@ module.exports = Livro;
 
 4 - Mova o array de livros para lá, utilizando a função require para importar a função construtora Livro.
 
-*Exemplo: (livros.js)*
-
 ```javascript
 var Livro = require('../domain/livro');
 
